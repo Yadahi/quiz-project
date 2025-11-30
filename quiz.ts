@@ -1,13 +1,5 @@
 import fs from "node:fs";
 
-// start the program by creating a "main" function that reads in the two command
-// line parameters the program should exit if there are invalid parameters.
-// the first parameter will be either 'create' or 'run', the second parameter will
-// be a filename. the function will call either "create_quiz" or "run_quiz"
-// depending on the parameter passed
-// 2 pts
-
-// put your code here
 function main() {
   const [mode, filename] = Deno.args;
 
@@ -26,14 +18,6 @@ function main() {
   }
 }
 
-// make a function that create a sample quiz file that consists
-// of 1 true/false question and 1 multiple choice question (in that order)
-// the correct answer to the true/false question should be *true*.
-// the correct choice to the multiple choice question should be *2*,
-// the second out of a possible 4 choices.
-// 2 pts
-
-// put your code here
 function createSample(filename: string) {
   const records: string[] = [
     "tf,the sky is blue,t",
@@ -44,13 +28,6 @@ function createSample(filename: string) {
   Deno.writeTextFileSync(filename, sampleRecords);
 }
 
-// create a function that will take a question and an answer
-// from a true/false question and display it to the user
-// the function will take the user's response and return
-// whether they answered it correctly as a boolean value
-// 2 pts
-
-// put your code here
 function displayTrueFalse(question: string, answer: string): boolean {
   console.log(question);
   let userInput;
@@ -76,13 +53,6 @@ function displayTrueFalse(question: string, answer: string): boolean {
   return isCorrect;
 }
 
-// create a function that will take a question, an answer, and choices
-// and display a multiple choice question to the user
-// the function will take the user's response and return whether they
-// answered it correctly as a boolean value
-// 3 pts
-
-// put your code here
 function displayMultipleChoice(
   question: string,
   answer: string,
@@ -117,14 +87,6 @@ function displayMultipleChoice(
   return isCorrect;
 }
 
-// create a function that will take a line of quiz data as a parameter
-// and call one of the previous display functions based on the 'type'
-// of question (determined by the first value in the line of quiz data)
-// the function should return the boolean values returned from the
-// display functions
-// 4 pts
-
-// put your code here
 function displayQuestion(line: string): boolean {
   const [type, question, answer, ...choices] = line.split(",");
 
@@ -135,14 +97,6 @@ function displayQuestion(line: string): boolean {
   }
 }
 
-// create a function that will open the file for reading
-// the function will read in each line of the file
-// and call "display_question" with the contents of a line
-// the function should return the total number questions and
-// the total number of correct answers as an array
-// 2 pts
-
-// put your code here
 function run(filename: string): [number, number] {
   const records: string[] = Deno.readTextFileSync(filename)?.split(/\r?\n/);
   const answers: Record<string, boolean> = {};
@@ -162,12 +116,6 @@ function run(filename: string): [number, number] {
   return [records.length, correctAnswers];
 }
 
-// make a function that creates a line of the quiz file
-// for a true/false question. the function will ask the
-// user to enter the question and what the correct answer is
-// 2 pts
-
-// put your code here
 function createTrueFalse(): string {
   const question = prompt("Enter the question:");
   const answer = prompt("Enter the answer (T/F):");
@@ -178,13 +126,6 @@ function createTrueFalse(): string {
   return line;
 }
 
-// make a function that creates a line of the quiz file
-// for a multiplel choice question. the function will ask
-// the user to enter the question, the different choices
-// to pick from (ENTER to end) and the correct answer
-// 4 pts
-
-// put your code here
 function createMultipleChoice(): string {
   let answer;
   const choices: string[] = [];
@@ -227,13 +168,6 @@ function createMultipleChoice(): string {
   return ["MC", question, answer, ...choices].join(",");
 }
 
-// make a function that will ask the user which type of question
-// they want to create (MC or TF), then call the appropriate
-// create function above. the function will return the line
-// of data that is returned from the other create functions
-// 3 pts
-
-// put your code here
 function createQuestion(): string {
   let result = "";
   let typeQuestion;
@@ -268,13 +202,6 @@ function createQuestion(): string {
   return result;
 }
 
-// make a function that creates a new, empty file using the filename passed in as
-// a parameter. the function will then call 'create_question' to add new questions
-// to the file until the user has finished
-// (ensure that the file is closed properly)
-// 4 pts
-
-// put your code here
 function create(filename: string) {
   const questions: string[] = [];
 
