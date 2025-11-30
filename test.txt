@@ -1,0 +1,3 @@
+MC,multichoice 1,1,a,b,c
+TF,truefalse 1,f
+MC,multi 2,2,a,b,c
